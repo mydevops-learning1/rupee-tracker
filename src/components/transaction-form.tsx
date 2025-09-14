@@ -9,11 +9,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import type { Transaction } from '@/lib/types';
+import { categories } from '@/lib/types';
 
 const formSchema = z.object({
   type: z.enum(['income', 'expense'], { required_error: 'Please select a transaction type.' }),
   amount: z.coerce.number().positive({ message: 'Amount must be positive.' }),
   description: z.string().min(3, { message: 'Description must be at least 3 characters.' }).max(100),
+  category: z.enum(categories, { required_error: 'Please select a category.' }),
 });
 
 type TransactionFormProps = {
@@ -81,6 +83,28 @@ export function TransactionForm({ onSubmit }: TransactionFormProps) {
               <FormControl>
                 <Textarea placeholder="e.g., Groceries, Salary, etc." {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

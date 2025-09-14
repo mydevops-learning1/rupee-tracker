@@ -25,6 +25,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+    }).format(amount);
+  };
+  
 export function DashboardChart({ data }: DashboardChartProps) {
   return (
     <Card>
@@ -52,7 +59,7 @@ export function DashboardChart({ data }: DashboardChartProps) {
               cursor={false}
               content={<ChartTooltipContent
                 indicator="dot"
-                formatter={(value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(value as number)}
+                formatter={(value) => formatCurrency(value as number)}
                 />}
             />
             <Bar dataKey="Income" fill="var(--color-Income)" radius={4} />

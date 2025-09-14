@@ -31,7 +31,7 @@ export function TransactionsTable({ transactions }: { transactions: Transaction[
           <TableHeader>
             <TableRow>
               <TableHead>Description</TableHead>
-              <TableHead>Type</TableHead>
+              <TableHead>Category</TableHead>
               <TableHead className="hidden sm:table-cell">Date</TableHead>
               <TableHead className="text-right">Amount</TableHead>
             </TableRow>
@@ -43,7 +43,7 @@ export function TransactionsTable({ transactions }: { transactions: Transaction[
                   <TableCell className="font-medium truncate max-w-28 sm:max-w-none">{t.description}</TableCell>
                   <TableCell>
                     <Badge variant={t.type === 'income' ? 'default' : 'secondary'} className={t.type === 'income' ? 'bg-accent text-accent-foreground hover:bg-accent/80' : 'bg-destructive/80 text-destructive-foreground hover:bg-destructive/70'}>
-                      {t.type}
+                      {t.category}
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden sm:table-cell">{formatDate(t.date)}</TableCell>
