@@ -26,7 +26,7 @@ export function TransactionForm({ onSubmit }: TransactionFormProps) {
     defaultValues: {
       description: '',
       type: 'expense',
-      amount: undefined,
+      amount: '' as any,
     },
   });
 
